@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: places-api
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - places-network
+
+  db:
+    image: postgres:16
+    container_name: places-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: places_db
+      POSTGRES_USER: places_user
+      POSTGRES_PASSWORD: places_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - places-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: places-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    networks:
+      - places-network
+
+networks:
+  places-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local 
