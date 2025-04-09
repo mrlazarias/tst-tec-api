@@ -1,0 +1,16 @@
+
+
+[1;37;40mCode Coverage Report:    [0m
+[1;37;40m  2025-04-09 18:10:32    [0m
+[1;37;40m                         [0m
+[1;37;40m Summary:                [0m
+[30;43m  Classes: 75.00% (3/4)  [0m
+[30;43m  Methods: 88.89% (8/9)  [0m
+[30;43m  Lines:   88.24% (30/34)[0m
+
+App\Http\Controllers\Api\PlaceController
+  [30;42mMethods: 100.00% ( 5/ 5)[0m   [30;42mLines: 100.00% ( 21/ 21)[0m
+App\Models\Place
+  [30;42mMethods: 100.00% ( 1/ 1)[0m   [30;42mLines: 100.00% (  7/  7)[0m
+App\Providers\AppServiceProvider
+  [30;42mMethods: 100.00% ( 2/ 2)[0m   [30;42mLines: 100.00% (  2/  2)[0m

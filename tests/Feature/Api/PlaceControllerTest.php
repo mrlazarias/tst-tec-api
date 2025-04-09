@@ -32,6 +32,17 @@ class PlaceControllerTest extends TestCase
             ->assertJsonFragment(['name' => 'Test Place']);
     }
 
+    public function test_returns_empty_array_when_no_places_match_filter()
+    {
+        Place::factory()->create(['name' => 'Test Place']);
+        Place::factory()->create(['name' => 'Another Place']);
+
+        $response = $this->getJson('/api/places?name=NonExistentName');
+
+        $response->assertStatus(200)
+            ->assertJsonCount(0);
+    }
+
     public function test_can_create_a_place()
     {
         $placeData = [
@@ -62,6 +73,13 @@ class PlaceControllerTest extends TestCase
             ]);
     }
 
+    public function test_returns_404_when_place_not_found()
+    {
+        $response = $this->getJson("/api/places/999");
+        
+        $response->assertStatus(404);
+    }
+
     public function test_can_update_a_place()
     {
         $place = Place::factory()->create();
@@ -79,6 +97,19 @@ class PlaceControllerTest extends TestCase
         $this->assertDatabaseHas('places', $updateData);
     }
 
+    public function test_returns_404_when_updating_nonexistent_place()
+    {
+        $updateData = [
+            'name' => 'Updated Place',
+            'city' => 'Updated City',
+            'state' => 'Updated State',
+        ];
+
+        $response = $this->putJson("/api/places/999", $updateData);
+        
+        $response->assertStatus(404);
+    }
+
     public function test_can_delete_a_place()
     {
         $place = Place::factory()->create();
@@ -87,6 +118,13 @@ class PlaceControllerTest extends TestCase
 
         $response->assertStatus(204);
         $this->assertDatabaseMissing('places', ['id' => $place->id]);
+    }
+
+    public function test_returns_404_when_deleting_nonexistent_place()
+    {
+        $response = $this->deleteJson("/api/places/999");
+        
+        $response->assertStatus(404);
     }
 
     public function test_validation_works_for_creating_place()

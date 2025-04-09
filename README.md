@@ -1,123 +1,142 @@
-# Places API
+# 📍 Places API
 
-A simple RESTful API for managing places built with Laravel 12 and PostgreSQL.
+Uma API RESTful para gerenciamento de lugares, construída com Laravel 12 e PostgreSQL.
 
-## Overview
+## 🚀 Funcionalidades
 
-This API provides endpoints to create, read, update, and delete place records. Each place has a name, city, state, and an automatically generated slug.
+- ✅ **Criar** novos lugares
+- 🔄 **Atualizar** informações de lugares
+- 🔍 **Buscar** lugares específicos
+- 📋 **Listar** todos os lugares
+- 🔎 **Filtrar** lugares por nome
+- 🧪 **100% de cobertura** de testes nas classes da aplicação
 
-## Requirements
+## 🧰 Tecnologias
+
+- **Laravel 12** - Framework PHP moderno
+- **PostgreSQL** - Banco de dados relacional
+- **Docker** - Ambiente de desenvolvimento e produção
+- **PHPUnit** - Framework de testes
+
+## 📋 Estrutura de Dados
+
+Cada lugar possui os seguintes atributos:
+
+| Atributo   | Descrição                                       |
+|------------|------------------------------------------------|
+| `name`     | Nome do lugar                                  |
+| `slug`     | Versão amigável para URL (gerada automaticamente) |
+| `city`     | Cidade onde o lugar está localizado            |
+| `state`    | Estado onde o lugar está localizado            |
+| `created_at` | Data e hora de criação do registro           |
+| `updated_at` | Data e hora da última atualização            |
+
+## 🛠️ Configuração e Instalação
+
+### Pré-requisitos
 
 - Docker
 - Docker Compose
 
-## Setup and Installation
+### Instalação
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd <repository-directory>
-```
+1. Clone o repositório:
+   ```bash
+   git clone <repositório-url>
+   cd <diretório-do-projeto>
+   ```
 
-2. Start the Docker containers:
-```bash
-docker-compose up -d
-```
+2. Inicie os contêineres Docker:
+   ```bash
+   docker-compose up -d
+   ```
 
-3. Install dependencies:
-```bash
-docker-compose exec app composer install
-```
+3. Instale as dependências:
+   ```bash
+   docker-compose exec app composer install
+   ```
 
-4. Generate application key:
-```bash
-docker-compose exec app php artisan key:generate
-```
+4. Gere a chave da aplicação:
+   ```bash
+   docker-compose exec app php artisan key:generate
+   ```
 
-5. Run migrations:
-```bash
-docker-compose exec app php artisan migrate
-```
+5. Execute as migrações:
+   ```bash
+   docker-compose exec app php artisan migrate
+   ```
 
-## Running Tests
+6. A API estará disponível em `http://localhost:8000/api`
 
-Run the test suite to ensure everything is working correctly:
+## 🧪 Executando Testes
+
+Execute a suíte de testes para garantir que tudo está funcionando corretamente:
+
 ```bash
 docker-compose exec app php artisan test
 ```
 
-## API Endpoints
+Para gerar um relatório de cobertura (necessário Xdebug):
 
-The API is accessible at `http://localhost:8000/api`.
+```bash
+docker-compose exec app php -d xdebug.mode=coverage vendor/bin/phpunit --coverage-html coverage
+```
 
-### Places
+## 📡 Endpoints da API
 
-#### Get All Places
+### Listar Lugares
 ```
 GET /api/places
 ```
-Query parameters:
-- `name` (optional): Filter places by name
+Parâmetros de consulta opcionais:
+- `name` - Filtra lugares pelo nome
 
-#### Get a Specific Place
+### Obter um Lugar Específico
 ```
 GET /api/places/{id}
 ```
 
-#### Create a Place
+### Criar um Lugar
 ```
 POST /api/places
 ```
-Request body:
+Corpo da requisição:
 ```json
 {
-    "name": "Place Name",
-    "city": "City Name",
-    "state": "State Name"
+    "name": "Nome do Lugar",
+    "city": "Nome da Cidade",
+    "state": "Nome do Estado"
 }
 ```
 
-#### Update a Place
+### Atualizar um Lugar
 ```
 PUT /api/places/{id}
 ```
-Request body:
+Corpo da requisição:
 ```json
 {
-    "name": "Updated Place Name",
-    "city": "Updated City Name",
-    "state": "Updated State Name"
+    "name": "Nome Atualizado",
+    "city": "Cidade Atualizada",
+    "state": "Estado Atualizado"
 }
 ```
 
-#### Delete a Place
+### Excluir um Lugar
 ```
 DELETE /api/places/{id}
 ```
 
-## Database Access
+## 🗄️ Acesso ao Banco de Dados
 
-The PostgreSQL database can be accessed through pgAdmin at `http://localhost:5050`:
-- Email: admin@admin.com
-- Password: admin
+### PostgreSQL
+- **Host**: localhost
+- **Porta**: 5432
+- **Banco de dados**: places_db
+- **Usuário**: places_user
+- **Senha**: places_password
 
-For direct database connection:
-- Host: localhost
-- Port: 5432
-- Database: places_db
-- Username: places_user
-- Password: places_password
-
-## Project Structure
-
-The project follows clean code principles and is organized using the standard Laravel directory structure:
-
-- `app/Models/Place.php`: The Place model with automatic slug generation
-- `app/Http/Controllers/Api/PlaceController.php`: Controller with CRUD operations
-- `database/migrations/`: Database migrations
-- `routes/api.php`: API route definitions
-- `tests/Feature/Api/PlaceControllerTest.php`: Feature tests for the API endpoints
-
-## License
-
-This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### pgAdmin (Interface Web para PostgreSQL)
+- **URL**: http://localhost:5050
+- **Email**: admin@admin.com
+- **Senha**: admin
