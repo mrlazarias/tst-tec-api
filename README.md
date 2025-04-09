@@ -1,142 +1,142 @@
 # 📍 Places API
 
-Uma API RESTful para gerenciamento de lugares, construída com Laravel 12 e PostgreSQL.
+A RESTful API for managing places, built with Laravel 12 and PostgreSQL.
 
-## 🚀 Funcionalidades
+## 🚀 Features
 
-- ✅ **Criar** novos lugares
-- 🔄 **Atualizar** informações de lugares
-- 🔍 **Buscar** lugares específicos
-- 📋 **Listar** todos os lugares
-- 🔎 **Filtrar** lugares por nome
-- 🧪 **100% de cobertura** de testes nas classes da aplicação
+- ✅ **Create** new places
+- 🔄 **Update** place information
+- 🔍 **Retrieve** specific places
+- 📋 **List** all places
+- 🔎 **Filter** places by name
+- 🧪 **100% test coverage** on application classes
 
-## 🧰 Tecnologias
+## 🧰 Technologies
 
-- **Laravel 12** - Framework PHP moderno
-- **PostgreSQL** - Banco de dados relacional
-- **Docker** - Ambiente de desenvolvimento e produção
-- **PHPUnit** - Framework de testes
+- **Laravel 12** - Modern PHP framework
+- **PostgreSQL** - Relational database
+- **Docker** - Development and production environment
+- **PHPUnit** - Testing framework
 
-## 📋 Estrutura de Dados
+## 📋 Data Structure
 
-Cada lugar possui os seguintes atributos:
+Each place has the following attributes:
 
-| Atributo   | Descrição                                       |
-|------------|------------------------------------------------|
-| `name`     | Nome do lugar                                  |
-| `slug`     | Versão amigável para URL (gerada automaticamente) |
-| `city`     | Cidade onde o lugar está localizado            |
-| `state`    | Estado onde o lugar está localizado            |
-| `created_at` | Data e hora de criação do registro           |
-| `updated_at` | Data e hora da última atualização            |
+| Attribute  | Description                                     |
+|------------|-------------------------------------------------|
+| `name`     | Name of the place                               |
+| `slug`     | URL-friendly version (automatically generated)  |
+| `city`     | City where the place is located                 |
+| `state`    | State where the place is located                |
+| `created_at` | Date and time when the record was created     |
+| `updated_at` | Date and time of the last update              |
 
-## 🛠️ Configuração e Instalação
+## 🛠️ Setup and Installation
 
-### Pré-requisitos
+### Prerequisites
 
 - Docker
 - Docker Compose
 
-### Instalação
+### Installation
 
-1. Clone o repositório:
+1. Clone the repository:
    ```bash
-   git clone <repositório-url>
-   cd <diretório-do-projeto>
+   git clone <repository-url>
+   cd <repository-directory>
    ```
 
-2. Inicie os contêineres Docker:
+2. Start the Docker containers:
    ```bash
    docker-compose up -d
    ```
 
-3. Instale as dependências:
+3. Install dependencies:
    ```bash
    docker-compose exec app composer install
    ```
 
-4. Gere a chave da aplicação:
+4. Generate application key:
    ```bash
    docker-compose exec app php artisan key:generate
    ```
 
-5. Execute as migrações:
+5. Run migrations:
    ```bash
    docker-compose exec app php artisan migrate
    ```
 
-6. A API estará disponível em `http://localhost:8000/api`
+6. The API will be available at `http://localhost:8000/api`
 
-## 🧪 Executando Testes
+## 🧪 Running Tests
 
-Execute a suíte de testes para garantir que tudo está funcionando corretamente:
+Run the test suite to ensure everything is working correctly:
 
 ```bash
 docker-compose exec app php artisan test
 ```
 
-Para gerar um relatório de cobertura (necessário Xdebug):
+For generating a coverage report (Xdebug required):
 
 ```bash
 docker-compose exec app php -d xdebug.mode=coverage vendor/bin/phpunit --coverage-html coverage
 ```
 
-## 📡 Endpoints da API
+## 📡 API Endpoints
 
-### Listar Lugares
+### List Places
 ```
 GET /api/places
 ```
-Parâmetros de consulta opcionais:
-- `name` - Filtra lugares pelo nome
+Optional query parameters:
+- `name` - Filter places by name
 
-### Obter um Lugar Específico
+### Get a Specific Place
 ```
 GET /api/places/{id}
 ```
 
-### Criar um Lugar
+### Create a Place
 ```
 POST /api/places
 ```
-Corpo da requisição:
+Request body:
 ```json
 {
-    "name": "Nome do Lugar",
-    "city": "Nome da Cidade",
-    "state": "Nome do Estado"
+    "name": "Place Name",
+    "city": "City Name",
+    "state": "State Name"
 }
 ```
 
-### Atualizar um Lugar
+### Update a Place
 ```
 PUT /api/places/{id}
 ```
-Corpo da requisição:
+Request body:
 ```json
 {
-    "name": "Nome Atualizado",
-    "city": "Cidade Atualizada",
-    "state": "Estado Atualizado"
+    "name": "Updated Name",
+    "city": "Updated City",
+    "state": "Updated State"
 }
 ```
 
-### Excluir um Lugar
+### Delete a Place
 ```
 DELETE /api/places/{id}
 ```
 
-## 🗄️ Acesso ao Banco de Dados
+## 🗄️ Database Access
 
 ### PostgreSQL
 - **Host**: localhost
-- **Porta**: 5432
-- **Banco de dados**: places_db
-- **Usuário**: places_user
-- **Senha**: places_password
+- **Port**: 5432
+- **Database**: places_db
+- **Username**: places_user
+- **Password**: places_password
 
-### pgAdmin (Interface Web para PostgreSQL)
+### pgAdmin (PostgreSQL Web Interface)
 - **URL**: http://localhost:5050
 - **Email**: admin@admin.com
-- **Senha**: admin
+- **Password**: admin
