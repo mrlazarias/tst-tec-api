@@ -13,6 +13,20 @@ services:
     networks:
       - places-network
 
+  nginx:
+    image: nginx:alpine
+    container_name: places-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - places-network
+    depends_on:
+      - app
+
   db:
     image: postgres:16
     container_name: places-db
